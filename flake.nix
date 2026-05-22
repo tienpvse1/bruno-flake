@@ -25,6 +25,11 @@
           exec ${pkgs.appimage-run}/bin/appimage-run ${brunoAppImage}
         '';
 
+        brunoIcon = pkgs.fetchurl {
+          url = "https://www.usebruno.com/favicon.ico";
+          hash = "sha256-...";
+        };
+
         desktop = pkgs.makeDesktopItem {
           name = "bruno";
           desktopName = "Bruno";
@@ -32,6 +37,11 @@
           terminal = false;
           categories = [ "Development" "Network" ];
         };
+        icon = pkgs.runCommand "bruno-icon" {} ''
+           mkdir -p $out/share/icons/hicolor/256x256/apps
+           cp ${brunoIcon} \
+           $out/share/icons/hicolor/256x256/apps/bruno.ico
+        '';
       in
       pkgs.symlinkJoin {
         name = "bruno-appimage";
@@ -39,6 +49,7 @@
         paths = [
           app
           desktop
+          icon
         ];
       };
     };
