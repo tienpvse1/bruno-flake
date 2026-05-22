@@ -27,7 +27,7 @@
 
         brunoIcon = pkgs.fetchurl {
           url = "https://www.usebruno.com/favicon.ico";
-          hash = "sha256-...";
+          hash = "sha256-NAB+3mCUFz1DszKfAYZK33RlJ+BsAbAPK6kHsPWYSfI=";
         };
 
         desktop = pkgs.makeDesktopItem {
