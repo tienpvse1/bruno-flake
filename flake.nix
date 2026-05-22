@@ -22,10 +22,7 @@
       packages.${system}.default =
       let
         app = pkgs.writeShellScriptBin "bruno" ''
-          exec ${pkgs.appimage-run}/bin/appimage-run \
-            --no-sandbox \
-            --disable-gpu \
-            ${brunoAppImage}
+          exec ${pkgs.appimage-run}/bin/appimage-run \ ${brunoAppImage}
         '';
 
         desktop = pkgs.makeDesktopItem {
