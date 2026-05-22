@@ -34,6 +34,7 @@
           name = "bruno";
           desktopName = "Bruno";
           exec = "bruno";
+          icon = "bruno";
           terminal = false;
           categories = [ "Development" "Network" ];
         };
