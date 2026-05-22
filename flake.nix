@@ -20,8 +20,29 @@
     in
     {
       packages.${system}.default =
-        pkgs.writeShellScriptBin "bruno" ''
-          exec ${pkgs.appimage-run}/bin/appimage-run  ${brunoAppImage}
+      let
+        app = pkgs.writeShellScriptBin "bruno" ''
+          exec ${pkgs.appimage-run}/bin/appimage-run \
+            --no-sandbox \
+            --disable-gpu \
+            ${brunoAppImage}
         '';
+
+        desktop = pkgs.makeDesktopItem {
+          name = "bruno";
+          desktopName = "Bruno";
+          exec = "bruno";
+          terminal = false;
+          categories = [ "Development" "Network" ];
+        };
+      in
+      pkgs.symlinkJoin {
+        name = "bruno-appimage";
+
+        paths = [
+          app
+          desktop
+        ];
+      };
     };
 }
